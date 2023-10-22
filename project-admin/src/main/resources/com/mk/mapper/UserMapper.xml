@@ -5,7 +5,10 @@
 <mapper namespace="com.mk.mapper.UserMapper">
 
     <select id="getUserName" resultType="com.mk.bean.User">
-        select * from sys_user where user_id=${id}
+        select * from sys_user where user_name=#{userName}
+    </select>
+    <select id="selectByUserName" resultType="com.mk.bean.User">
+        select * from sys_user where user_name=#{userName}
     </select>
 </mapper>
 

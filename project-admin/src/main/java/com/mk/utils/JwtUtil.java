@@ -34,14 +34,14 @@ public class JwtUtil {
      * JWT令牌的有效时间，单位秒
      * - 默认30分钟
      */
-    private static Long expiration=180000L;
+    private static Long expiration=1000*60*30L;
 
     public static String createToken(User user) {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
-                .claim("user", user.getName())
-                .claim("id", user.getId())
+                .claim("name", user.getUsername())
+                .claim("password", user.getPassword())
                 .setSubject("user")
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .setId(UUID.randomUUID().toString())
@@ -55,8 +55,8 @@ public class JwtUtil {
                 .parseClaimsJws(token);
         Claims body = claimsJws.getBody();
         User user = new User();
-        user.setId(body.get("id").toString());
-        user.setName(body.get("name").toString());
+        user.setUsername(body.get("name").toString());
+        user.setPassword(body.get("password").toString());
         return user;
     }
     ///**

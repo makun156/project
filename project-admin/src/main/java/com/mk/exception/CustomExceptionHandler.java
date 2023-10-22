@@ -10,6 +10,6 @@ public class CustomExceptionHandler {
     @ExceptionHandler(RuntimeException.class)
     public Result handleException(Exception e) {
         log.error("系统异常：", e);
-        return Result.fail("未登录认证，请登录后再试！");
+        return Result.fail(e.getMessage());
     }
 }
