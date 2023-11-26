@@ -63,6 +63,7 @@ public class SeckillListener implements RocketMQListener<MessageExt> {
     //    goodsService.decreaseStore(userId, goodsId);
     //}
 
+
     // TODO: 2023/11/25 问题复现2：在事务前加锁，只适合单机版，分布式版会出现问题
     //@Override
     //public void onMessage(MessageExt message) {
