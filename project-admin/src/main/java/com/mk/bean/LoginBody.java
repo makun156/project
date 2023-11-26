@@ -1,7 +1,7 @@
 package com.mk.bean;
 
 /**
- * 用户登录对象
+ * 账号密码登录对象
  */
 public class LoginBody {
     /**
@@ -13,16 +13,20 @@ public class LoginBody {
      * 用户密码
      */
     private String password;
-
+    /**
+     * 用户手机号
+     */
+    private String phoneNumber;
     /**
      * 验证码
      */
     private String code;
-
     /**
-     * 唯一标识
+     * 登录类型
+     * 1:用户名密码登录
+     * 2:手机号验证码登录
      */
-    private String uuid;
+    private Integer type;
 
     public String getUsername() {
         return username;
@@ -48,11 +52,4 @@ public class LoginBody {
         this.code = code;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
-    }
 }

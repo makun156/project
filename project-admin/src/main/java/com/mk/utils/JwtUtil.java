@@ -40,8 +40,7 @@ public class JwtUtil {
         JwtBuilder jwtBuilder = Jwts.builder();
         jwtBuilder.setHeaderParam("typ", "JWT")
                 .setHeaderParam("alg", "HS256")
-                .claim("name", user.getUsername())
-                .claim("password", user.getPassword())
+                .claim("phone", user.getPhone())
                 .setSubject("user")
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
                 .setId(UUID.randomUUID().toString())
@@ -55,8 +54,7 @@ public class JwtUtil {
                 .parseClaimsJws(token);
         Claims body = claimsJws.getBody();
         User user = new User();
-        user.setUsername(body.get("name").toString());
-        user.setPassword(body.get("password").toString());
+        user.setPhone(body.get("phone").toString());
         return user;
     }
     ///**

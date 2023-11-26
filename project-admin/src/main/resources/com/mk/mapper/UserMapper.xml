@@ -3,13 +3,72 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mk.mapper.UserMapper">
-
-    <select id="getUserName" resultType="com.mk.bean.User">
-        select * from sys_user where user_name=#{userName}
+    <resultMap id="user" type="user">
+        <id column="user_id" property="id" jdbcType="BIGINT" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="phonenumber" property="phone" jdbcType="VARCHAR" />
+        <result column="user_type" property="type" jdbcType="VARCHAR" />
+        <result column="user_type" property="type" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="VARCHAR" />
+        <result column="login_time" property="loginTime" jdbcType="DATE" />
+    </resultMap>
+    <select id="getUserName" resultType="user" resultMap="user">
+        select *
+        from sys_user
+        where user_name = #{userName}
     </select>
-    <select id="selectByUserName" resultType="com.mk.bean.User">
-        select * from sys_user where user_name=#{userName}
+    <select id="selectByUserName" resultType="user" resultMap="user">
+        select *
+        from sys_user
+        where user_name = #{userName}
     </select>
+    <select id="getUserByPhone" resultType="user" resultMap="user">
+        select *
+        from sys_user
+        where phonenumber = #{phone}
+    </select>
+    <insert id="insertUser" parameterType="user">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != '' ">
+                user_name,
+            </if>
+            <if test="password !=null and password!= '' ">
+                password,
+            </if>
+            user_type,
+            nick_name,
+            <if test="phone != null and phone != '' ">
+                phonenumber,
+            </if>
+            login_time,
+        </trim>
+        value
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username != null and username != '' ">
+                #{username},
+            </if>
+            <if test="password != null and password != '' ">
+                #{password},
+            </if>
+            <if test="type != null and type != '' ">
+                #{type},
+            </if>
+            <if test="nickName != null and nickName != '' ">
+                #{nickName},
+            </if>
+            <if test="phone != null and phone != '' ">
+                #{phone},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime},
+            </if>
+        </trim>
+    </insert>
 </mapper>
 
 

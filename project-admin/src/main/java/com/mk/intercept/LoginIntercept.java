@@ -1,6 +1,7 @@
 package com.mk.intercept;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.jwt.JWTUtil;
 import com.mk.bean.User;
 import com.mk.bean.UserDto;
 import com.mk.utils.JwtUtil;
@@ -11,7 +12,9 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
+import java.util.Objects;
 
+import static com.mk.constant.Constant.*;
 @Slf4j
 public class LoginIntercept implements HandlerInterceptor {
     private StringRedisTemplate redis;
@@ -28,13 +31,13 @@ public class LoginIntercept implements HandlerInterceptor {
         if (token == null) {
             throw new RuntimeException("未登录！");
         }
-        Map<Object, Object> userMap = redis.opsForHash().entries("login:token:" + token);
+        Map<Object, Object> userMap = redis.opsForHash().entries(LOGIN_TOKEN + token);
         User userData = JwtUtil.parseToken(token);
         if (userMap.isEmpty()) {
             throw new RuntimeException("令牌过期，请重新登录！");
         }
-        UserDto userDto = BeanUtil.fillBeanWithMap(userMap, new UserDto(), false);
-        if (!userDto.getPassword().equals(userData.getPassword()) || !userDto.getUsername().equals(userData.getUsername())) {
+        User user = BeanUtil.fillBeanWithMap(userMap, new User(), false);
+        if (!Objects.equals(userData.getPhone(), user.getPhone())) {
             throw new RuntimeException("用户信息错误，请重新登录！");
         }
         return true;

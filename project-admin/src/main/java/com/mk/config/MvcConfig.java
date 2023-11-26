@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    public final String[] excludePath={"/user/code","/user/login"};
+    public final String[] excludePath={"/user/code","/user/login","/register/**","/**"};
     @Autowired
     private StringRedisTemplate redis;
     @Override
