@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.concurrent.TimeUnit;
 
 import static com.mk.constant.Constant.*;
@@ -38,7 +39,7 @@ public class RegisterController {
         return AjaxResult.success(provinceService.queryAll());
     }
     /**
-     * 生成验证码
+     * 手机号注册生成验证码
      *
      * @param registerBody
      * @return
@@ -63,6 +64,16 @@ public class RegisterController {
     }
 
     /**
+     * 用户名注册
+     * @param username
+     * @param response
+     */
+    @PostMapping("captcha/{username}")
+    public void  captcha(@PathVariable("username") String username, HttpServletResponse response) {
+        registerService.captcha(username,response);
+    }
+
+    /**
      * 用户注册
      *
      * @param registerBody
@@ -72,4 +83,5 @@ public class RegisterController {
     public AjaxResult register(@RequestBody RegisterBody registerBody) {
         return registerService.register(registerBody);
     }
+
 }

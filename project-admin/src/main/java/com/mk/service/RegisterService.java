@@ -3,6 +3,8 @@ package com.mk.service;
 import com.mk.bean.AjaxResult;
 import com.mk.bean.RegisterBody;
 
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * 注册登录接口
  */
@@ -22,4 +24,6 @@ public interface RegisterService {
     String registerByName(RegisterBody registerBody);
 
     AjaxResult register(RegisterBody registerBody);
+
+    void captcha(String username, HttpServletResponse response);
 }

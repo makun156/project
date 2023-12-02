@@ -30,4 +30,10 @@ public class Constant {
     public static final String REDIS_LOCK="lock:";
     public static final Long REDIS_LOCK_EXPIRE_TIME= 1L;
 
+    /**
+     * captcha 图片验证码
+     */
+    public static final String CAPTCHA_CODE="captcha:code:";
+    public static final Long CAPTCHA_CODE_EXPIRE=1L;
+
 }

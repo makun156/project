@@ -2,6 +2,7 @@ package com.mk.service.imp;
 
 import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.code.kaptcha.Producer;
 import com.mk.annotation.Record;
 import com.mk.bean.AjaxResult;
 import com.mk.bean.RegisterBody;
@@ -32,7 +33,6 @@ public class UserServiceImp extends ServiceImpl<UserMapper,User> implements User
         User user = userMapper.getUserName(userId);
         return user;
     }
-
     /**
      * 用户登录接口
      * @param user
