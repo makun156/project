@@ -4,5 +4,5 @@ import com.mk.bean.AjaxResult;
 
 public interface GoodsService {
 
-    AjaxResult decreaseStore(Integer userId, Integer goodsId);
+    default AjaxResult decreaseStore(Integer userId, Integer goodsId){return null;};
 }

@@ -6,6 +6,8 @@ import com.mk.service.RecordService;
 import com.mk.utils.IpUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
@@ -36,4 +38,5 @@ public class RecordAspect {
         operate.setMessage(record.value());
         operateService.recordOperateInfo(operate);
     }
+
 }
