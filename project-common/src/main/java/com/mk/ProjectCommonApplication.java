@@ -53,6 +53,8 @@ public class ProjectCommonApplication {
         //去调用控制器方法
         handlerMappingAdapter.invokeHandlerMethod(new MockHttpServletRequest("GET", "/test"), new MockHttpServletResponse(), (HandlerMethod) get.getHandler());
         System.out.println(1);
+        System.out.println(1);
+        System.out.println(1);
     }
 
 }
